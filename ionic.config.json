@@ -1,0 +1,7 @@
+{
+  "name": "compra-smart",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
