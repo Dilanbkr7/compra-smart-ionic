@@ -1,0 +1,27 @@
+COMPRASMART — EVIDENCIAS FINALES PARA REPOSITORIO
+
+Este ZIP contiene SOLO README.md + docs/ para mantener intacta la aplicación que ya funciona en C:\Users\pauly\compra-smart.
+
+1) Copiar el ZIP descargado a Descargas y confirmar su nombre.
+2) Abrir CMD:
+   cd /d C:\Users\pauly\compra-smart
+3) Descomprimir este ZIP en esa carpeta y aceptar el reemplazo del README y docs.
+4) Verificar:
+   dir docs\video\inicio-android.mp4
+   dir docs\capturas\icono-instalacion-android.jpg
+   git status
+5) Preparar GitHub: crear repositorio vacío llamado compra-smart-ionic en github.com/new.
+6) Si todavía no está inicializado Git:
+   git init
+7) Revisar que NO se suban node_modules, android/local.properties, build, cache ni claves:
+   git status --short
+8) Agregar, confirmar y publicar:
+   git add .
+   git commit -m "docs: evidencias Android, icono y splash de CompraSmart"
+   git branch -M main
+   git remote -v
+   (si falta remoto:) git remote add origin https://github.com/TU_USUARIO/compra-smart-ionic.git
+   (si remoto incorrecto:) git remote set-url origin https://github.com/TU_USUARIO/compra-smart-ionic.git
+   git push -u origin main
+
+Cambia TU_USUARIO. No subas la carpeta ZIP al repositorio: sube su contenido.

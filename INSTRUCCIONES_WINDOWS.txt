@@ -1,0 +1,25 @@
+COMPRASMART - GUÍA RÁPIDA PARA WINDOWS (CMD)
+
+0. Instala Node.js LTS y Android Studio. Comprueba: node -v && npm -v
+1. npm install -g @ionic/cli
+2. cd %USERPROFILE%\Desktop
+3. ionic start compra-smart tabs --type=angular-standalone --capacitor
+4. cd compra-smart
+5. Extrae este archivo ZIP y COPIA TODO su contenido en esta carpeta,
+   combinando las carpetas src y assets y REEMPLAZANDO los archivos coincidentes.
+   No elimines el resto de archivos que creó Ionic.
+6. npm install @capacitor/android @capacitor/splash-screen
+7. npm install -D @capacitor/assets
+8. ionic serve
+9. Presiona Ctrl+C cuando hayas comprobado la aplicación web.
+10. npx cap add android
+11. ionic build
+12. npx @capacitor/assets generate --android
+13. npx cap sync android
+14. npx cap open android
+15. En Android Studio: Build > Generate App Bundles or APKs > Build APK(s)
+    APK: android\app\build\outputs\apk\debug\app-debug.apk
+
+Lee README.md para pasos detallados y pruebas.
+IMPORTANTE: Android 12+ limita el splash nativo al ícono central y fondo.
+La pantalla de bienvenida incorporada muestra también una ILUSTRACIÓN al abrir la app.

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">CompraSmart</string>
+    <string name="title_activity_main">CompraSmart</string>
+    <string name="package_name">com.deber2.comprasmart</string>
+    <string name="custom_url_scheme">com.deber2.comprasmart</string>
+</resources>

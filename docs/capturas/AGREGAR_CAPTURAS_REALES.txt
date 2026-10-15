@@ -1,0 +1,3 @@
+Aquí van capturas REALES tomadas desde Android Studio o desde el teléfono:
+icono-launcher.png, splash-nativo.png, bienvenida.png, compra.png, pago.png y validacion.png.
+No son capturas incluidas de antemano: debes tomarlas al ejecutar la app.

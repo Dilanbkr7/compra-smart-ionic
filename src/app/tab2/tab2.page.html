@@ -1,17 +1,85 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="app-screen">
+  <div class="page-wrap">
+    <header class="topbar">
+      <div class="brand-mini"><span class="brand-dot"></span> COMPRA<span>SMART</span></div>
+      <div class="mini-pill"><span class="live-dot"></span> DEBER 02</div>
+    </header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <section class="hero hero-pago">
+      <div class="hero-shine"></div>
+      <span class="hero-eyebrow">RESUMEN Y COBRO</span>
+      <h1>Todo listo<br/><span>para cobrar.</span></h1>
+      <p>Aplica un descuento, registra el efectivo y conoce el resultado.</p>
+      <div class="hero-art-badge"><span>✓</span><b>$</b></div>
+      <div class="hero-step"><span>02</span> / 02 &nbsp;·&nbsp; PAGO</div>
+    </section>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+    <ng-container *ngIf="servicio.compra() as compra; else sinCompra">
+      <div class="section-heading">
+        <div>
+          <span class="section-kicker">PASO 2</span>
+          <h2>Detalle de pago</h2>
+        </div>
+        <span class="section-count">02 — 02</span>
+      </div>
+
+      <section class="smart-card receipt-card">
+        <div class="receipt-title"><span>RECIBO DE COMPRA</span><span class="receipt-stamp">● EN PROCESO</span></div>
+        <div class="product-row">
+          <div class="product-avatar">▦</div>
+          <div class="product-data"><strong>{{ compra.nombre }}</strong><small>{{ compra.cantidad }} × {{ moneda(compra.precioUnitario) }}</small></div>
+          <strong>{{ moneda(compra.subtotal) }}</strong>
+        </div>
+        <div class="receipt-line"></div>
+        <div class="receipt-item"><span>Subtotal recibido</span><strong>{{ moneda(subtotal) }}</strong></div>
+      </section>
+
+      <form class="smart-card payment-form" (ngSubmit)="calcular()" novalidate>
+        <label class="field-label" for="descuento">Descuento aplicado (%)</label>
+        <div class="smart-input">
+          <span class="field-symbol">%</span>
+          <input id="descuento" name="descuento" type="number" min="0" max="100"
+                 step="0.01" inputmode="decimal" [(ngModel)]="descuento"
+                 (ngModelChange)="limpiarResultado()" placeholder="0" />
+        </div>
+        <div class="discount-row"><span>Ahorro por descuento</span><strong>− {{ moneda(descuentoMonto) }}</strong></div>
+        <div class="grand-total"><div><span>Total final</span><small>Incluye descuento</small></div><strong>{{ moneda(total) }}</strong></div>
+
+        <label class="field-label" for="dineroRecibido">Dinero entregado por el cliente <span>*</span></label>
+        <div class="smart-input">
+          <span class="field-symbol dollar">$</span>
+          <input id="dineroRecibido" name="dineroRecibido" type="number" min="0"
+                 step="0.01" inputmode="decimal" [(ngModel)]="dineroRecibido"
+                 (ngModelChange)="limpiarResultado()" placeholder="0.00" />
+        </div>
+        <div class="inline-error" role="alert" *ngIf="error"><span>!</span> {{ error }}</div>
+        <ion-button class="smart-action" type="submit" expand="block">
+          Calcular pago <span class="action-arrow">→</span>
+        </ion-button>
+      </form>
+
+      <section class="result-card" *ngIf="mostrarResultado" [class.result-pending]="estado === 'pendiente'">
+        <div class="result-icon">{{ estado === 'pendiente' ? '!' : '✓' }}</div>
+        <span class="result-kicker">RESULTADO DEL PAGO</span>
+        <ng-container [ngSwitch]="estado">
+          <ng-container *ngSwitchCase="'cambio'"><h2>Cambio para el cliente</h2><strong>{{ moneda(cambio) }}</strong><p>Pago realizado. Entrega este valor de vuelta.</p></ng-container>
+          <ng-container *ngSwitchCase="'pendiente'"><h2>Saldo pendiente</h2><strong>{{ moneda(pendiente) }}</strong><p>El cliente debe completar este importe.</p></ng-container>
+          <ng-container *ngSwitchDefault><h2>Pago exacto</h2><strong>{{ moneda(0) }}</strong><p>Pago realizado. No hay cambio ni saldo pendiente.</p></ng-container>
+        </ng-container>
+      </section>
+
+      <button class="text-action" type="button" (click)="nuevaCompra()">＋ Registrar una nueva compra</button>
+    </ng-container>
+
+    <ng-template #sinCompra>
+      <div class="smart-card empty-state">
+        <div class="empty-icon">▦</div>
+        <h2>Aún no hay una compra</h2>
+        <p>Primero registra un producto para poder calcular su pago.</p>
+        <ion-button class="smart-action" expand="block" (click)="irACompra()">Ir a Compra →</ion-button>
+      </div>
+    </ng-template>
+
+    <p class="bottom-credit">COMPRA<span>SMART</span> · IONIC + ANGULAR</p>
+  </div>
 </ion-content>

@@ -1,3 +1,12 @@
 <ion-app>
   <ion-router-outlet></ion-router-outlet>
+
+  <div class="intro-screen" *ngIf="mostrarBienvenida()" role="status" aria-label="Iniciando CompraSmart">
+    <div class="intro-glow"></div>
+    <div class="intro-logo">CS<span>✦</span></div>
+    <img src="assets/illustrations/welcome.png" alt="Imagen de bienvenida a CompraSmart" />
+    <h1>Compra<span>Smart</span></h1>
+    <p>Compras claras. Pagos simples.</p>
+    <div class="intro-loading"><i></i></div>
+  </div>
 </ion-app>

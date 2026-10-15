@@ -1,17 +1,75 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="app-screen">
+  <div class="page-wrap">
+    <header class="topbar">
+      <div class="brand-mini"><span class="brand-dot"></span> COMPRA<span>SMART</span></div>
+      <div class="mini-pill"><span class="live-dot"></span> DEBER 02</div>
+    </header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <section class="hero hero-compra">
+      <div class="hero-shine"></div>
+      <span class="hero-eyebrow">REGISTRO DE PRODUCTOS</span>
+      <h1>Una compra,<br/><span>sin complicaciones.</span></h1>
+      <p>Registra tu producto y calcula el importe automáticamente.</p>
+      <img src="assets/illustrations/welcome.png" alt="Ilustración de una compra" class="hero-art" />
+      <div class="hero-step"><span>01</span> / 02 &nbsp;·&nbsp; COMPRA</div>
+    </section>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+    <div class="section-heading">
+      <div>
+        <span class="section-kicker">PASO 1</span>
+        <h2>Datos de compra</h2>
+      </div>
+      <span class="section-count">01 — 02</span>
+    </div>
+
+    <form class="smart-card" (ngSubmit)="continuar()" novalidate>
+      <label class="field-label" for="nombreProducto">Nombre del producto <span>*</span></label>
+      <div class="smart-input">
+        <span class="field-symbol">▦</span>
+        <input id="nombreProducto" name="nombreProducto" type="text"
+               [(ngModel)]="nombreProducto" maxlength="80"
+               placeholder="Ej. Audífonos inalámbricos" autocomplete="off" />
+      </div>
+
+      <div class="two-fields">
+        <div>
+          <label class="field-label" for="cantidad">Cantidad <span>*</span></label>
+          <div class="quantity-control">
+            <button type="button" class="qty-btn" (click)="ajustarCantidad(-1)" aria-label="Restar una unidad">−</button>
+            <input id="cantidad" name="cantidad" type="number" step="1" min="1"
+                   inputmode="numeric" [(ngModel)]="cantidad" />
+            <button type="button" class="qty-btn" (click)="ajustarCantidad(1)" aria-label="Sumar una unidad">+</button>
+          </div>
+        </div>
+        <div>
+          <label class="field-label" for="precioUnitario">Precio unitario <span>*</span></label>
+          <div class="smart-input">
+            <span class="field-symbol dollar">$</span>
+            <input id="precioUnitario" name="precioUnitario" type="number"
+                   step="0.01" min="0.01" inputmode="decimal" [(ngModel)]="precioUnitario"
+                   placeholder="0.00" />
+          </div>
+        </div>
+      </div>
+
+      <div class="inline-error" role="alert" *ngIf="error">
+        <span>!</span> {{ error }}
+      </div>
+
+      <div class="subtotal-box">
+        <div class="subtotal-label">
+          <span>Subtotal estimado</span>
+          <small>Antes de descuentos</small>
+        </div>
+        <strong>{{ moneda(subtotal) }}</strong>
+      </div>
+
+      <ion-button class="smart-action" type="submit" expand="block">
+        Continuar al pago <span class="action-arrow">→</span>
+      </ion-button>
+      <p class="form-footnote">🔒 Cálculo local, sin conexión a internet.</p>
+    </form>
+
+    <p class="bottom-credit">COMPRA<span>SMART</span> · IONIC + ANGULAR</p>
+  </div>
 </ion-content>
